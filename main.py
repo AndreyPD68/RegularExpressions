@@ -103,7 +103,7 @@ def delele_client(cur, id):
 
 # Поиск клиента по данным
 def find_client(cur, client_id=None,  first_name=None, last_name=None, email=None, phone_number=None):
-    if phone_number:    #Проверяем был ли введен телефон
+    if phone_number:
         cur.execute("""
                 SELECT last_name FROM Clients 
                 JOIN Client_phones ON clients.client_id=client_phones.client_id
@@ -125,10 +125,10 @@ with psycopg2.connect(database="Home_Work", user="postgres", password="***") as 
     with conn.cursor() as cur:
         delete_tables(cur)
         create_db(cur)
-        add_client(cur, 1, 'Иван', 'Иванов', 'Ivanvano@mail.ru', '+79227776666', '+11233211496')  #Добавляем клиента с телефонами
-        add_client(cur, 2, 'Геннадий', 'Букин', 'genabuk@gmail.com')  #Добавляем клиента без телефонов
+        add_client(cur, 1, 'Иван', 'Иванов', 'Ivanvano@mail.ru', '+79227776666', '+11233211496')
+        add_client(cur, 2, 'Геннадий', 'Букин', 'genabuk@gmail.com')
         add_client(cur, 3, 'Олег', 'Шматко', 'Corporal@yandex.ru', '+777-777')
-        add_phone(cur, 2, '+71112223344')  #Добаляем телефон к отдельному клиенту
+        add_phone(cur, 2, '+71112223344')
         change_client_data(cur, client_id=3, first_name='Олег', old_phones=['+777-777'],
                            new_phones=['+666-666', '+888-888'])
         delete_phone(cur, '+777-777')
